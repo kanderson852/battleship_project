@@ -8,7 +8,7 @@ describe Cell do
     expect(cell).to be_an_instance_of(Cell)
   end
 
-  xit 'attributes' do
+  it 'attributes' do
     cell = Cell.new("B4")
     expect(cell.coordinate).to eq("B4")
     expect(cell.ship).to eq(nil)
@@ -39,5 +39,40 @@ describe Cell do
 
 
     expect(cell.fired_upon?).to eq(true)
+  end
+
+  it '#render' do
+    cell_1 = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cell_1.render).to eq(".")
+
+    cell_1.fire_upon
+
+    expect(cell_1.render).to eq("M")
+  end
+
+  xit "can be fired upon and sink" do
+     cell_2 = Cell.new("C3")
+     cruiser = Ship.new("Cruiser", 3)
+
+     cell_2.place_ship(cruiser)
+
+     expect(cell_1.render).to eq(".")
+    # Indicate that we want to show a ship with the optional argument
+     expect(cell_2.render(true)).to eq("S")
+
+     cell_2.fire_upon
+
+     expect(cell_1.render).to eq("H")
+
+     expect(cruiser.sunk?).to eq(false)
+
+     cruiser.hit
+     cruiser.hit
+
+     expect(cruiser.sunk?).to eq(true)
+
+     expect(cell_1.render).to eq("X")
   end
 end
