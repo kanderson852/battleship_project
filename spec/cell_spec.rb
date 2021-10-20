@@ -15,7 +15,7 @@ describe Cell do
     expect(cell.empty?).to eq(true)
   end
 
-  xit 'empty?' do
+  it 'empty?' do
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
@@ -41,7 +41,7 @@ describe Cell do
     expect(cell.fired_upon?).to eq(true)
   end
 
-  it '#render' do
+  xit '#render' do
     cell_1 = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
