@@ -30,8 +30,10 @@ class Cell
     @fired = true
   end
 
-  def render
-    if @fired == false
+  def render(optional_arg = false)
+    if @fired == false && optional_arg == true
+      "S"
+    elsif @fired == false
       "."
     elsif @fired == true && @is_empty == true
       "M"
@@ -41,7 +43,4 @@ class Cell
       "H"
     end
   end
-
-
-
 end
