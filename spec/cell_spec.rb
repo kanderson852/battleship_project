@@ -57,8 +57,8 @@ describe Cell do
      cell_2.place_ship(cruiser)
 
      expect(cell_2.render).to eq(".")
-    # Indicate that we want to show a ship with the optional argument
-     # expect(cell_2.render(true)).to eq("S")
+    
+     expect(cell_2.render(true)).to eq("S")
 
      cell_2.fire_upon
 
