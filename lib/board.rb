@@ -26,11 +26,11 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  def valid_placement?(ship, coordinates)
-    #validate length
-    if vertical || horizontal == 1
-      true
-  end
+  # def valid_placement?(ship, coordinates)
+  #   #validate length
+  #   if vertical || horizontal == 1
+  #     true
+  # end
 
   #valid placement needs to
   #array needs to be same length as ship
@@ -44,7 +44,7 @@ class Board
   # Find a way to check numbers, and letters separately for all conditions after they are passed into our Validate Placement method as an array of coordinates
 
  ## checks for vertical placement
-  def vertical(coordinates)
+  def vertical_letters(coordinates)
     coordinates.map do |coordinate|
       coordinate.split('')
     end.map do |letter|
@@ -52,31 +52,52 @@ class Board
     end.uniq.length
   end
  ## checks for horizontal placement
-  def horizontal(coordinates)
-    coordinates.map do |key|
-      key.split('')
+  def horizontal_numbers(coordinates)
+    coordinates.map do |coordinates|
+      coordinates.split('')
     end.map do |number|
       number.last()
     end.uniq.length
   end
-
-  # alpha = coordinates.map do |coordinate|
-  #   coordinate.first
-  # end
-  # alpha
-
-
-  # def separate_numbers
-  #   keys = @cells.keys.to_a
-  #   keys.map do |key|
-  #     key.split('')
-  #   end.map do |num|
-  #     num.last()
-  #   end
-  # end
+  #checks if letters are in ascending order
+  def vertical_letters_ascending?(coordinates)
+    a = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |letter|
+      letter.first()
+    end.sort
+    b = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |letter|
+      letter.first()
+    end
+    if a == b
+      true
+    else
+      false
+    end
+  end
+  #checks if numbers are ascending
+  def horizontal_numbers_ascending?(coordinates)
+    a = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |number|
+      number.last()
+    end.sort
+    b = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |number|
+      number.last()
+    end
+    if a == b
+      true
+    else
+      false
+    end
+  end
   # Are numbers consecutive when ascending? if not, then FALSE.
-
   # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
+
   # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there more than 1 number used, then FALSE.
   # If letters and numbers are both ascending, then FALSE because it would mean it was placed diagonally.
   # If letters are descending, then its FALSE
