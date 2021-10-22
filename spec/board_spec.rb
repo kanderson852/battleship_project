@@ -69,4 +69,20 @@ RSpec.describe Board do
     expect(board.horizontal_numbers_ascending?(["A1","A2","A3"])).to eq(true)
     expect(board.horizontal_numbers_ascending?(["A3","A2","A1"])).to eq(false)
   end
+
+  it 'check letters are consecutive' do
+    board = Board.new
+    expect(board.consecutive_letters(["A1","B1"])).to eq(true)
+    expect(board.consecutive_letters(["A1","A2"])).to eq(false)
+    expect(board.consecutive_letters(["A1","B1","C1"])).to eq(true)
+    expect(board.consecutive_letters(["A1","A2","A3"])).to eq(false)
+  end
+
+  it 'checks numbers are consecutive' do
+    board = Board.new
+    expect(board.consecutive_numbers(["A1","A2"])).to eq(true)
+    expect(board.consecutive_numbers(["A1","A3"])).to eq(false)
+    expect(board.consecutive_numbers(["A1","A2","A3"])).to eq(true)
+    expect(board.consecutive_numbers(["A1","A3","A4"])).to eq(false)
+  end
 end
