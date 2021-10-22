@@ -32,29 +32,41 @@ RSpec.describe Board do
     expect(board.valid_coordinate?("A22")).to eq(false)
   end
 
-  xit 'validates placements' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    expect(board.valid_placement?(cruiser, ["A1", "A2"])).to eq (false)
-    expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
-  end
-  xit 'validates placements' do
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to eq(false)
-  end
+  # xit 'validates placements' do
+  #   board = Board.new
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   submarine = Ship.new("Submarine", 2)
+  #   expect(board.valid_placement?(cruiser, ["A1", "A2"])).to eq (false)
+  #   expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
+  # end
+  # xit 'validates placements' do
+  #   board = Board.new
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   submarine = Ship.new("Submarine", 2)
+  #   expect(board.valid_placement?(cruiser, ["A1", "A2", "A4"])).to eq(false)
+  # end
 
   it 'checks vertical placement' do
     board = Board.new
-    expect(board.vertical(["A1","A2","A3"])).to eq(1)
-    expect(board.vertical(["A1","B2","C3"])).to eq(3)
+    expect(board.vertical_letters(["A1","A2","A3"])).to eq(1)
+    expect(board.vertical_letters(["A1","B2","C3"])).to eq(3)
   end
 
   it 'checks horizontal placement' do
     board = Board.new
-    expect(board.horizontal(["A1","A2","A3"])).to eq(3)
-    expect(board.horizontal(["A1","B1","C1"])).to eq(1)
+    expect(board.horizontal_numbers(["A1","A2","A3"])).to eq(3)
+    expect(board.horizontal_numbers(["A1","B1","C1"])).to eq(1)
+  end
+
+  it 'checks letters are ascending' do
+    board = Board.new
+    expect(board.vertical_letters_ascending?(["A1","B1","C1"])).to eq(true)
+    expect(board.vertical_letters_ascending?(["C1","B1","A1"])).to eq(false)
+  end
+
+  it 'checks numbers are ascending' do
+    board = Board.new
+    expect(board.horizontal_numbers_ascending?(["A1","A2","A3"])).to eq(true)
+    expect(board.horizontal_numbers_ascending?(["A3","A2","A1"])).to eq(false)
   end
 end
