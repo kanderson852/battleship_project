@@ -59,6 +59,7 @@ class Board
       number.last()
     end.uniq.length
   end
+
   #checks if letters are in ascending order
   def vertical_letters_ascending?(coordinates)
     a = coordinates.map do |coordinates|
@@ -95,6 +96,50 @@ class Board
       false
     end
   end
+
+  def consecutive_letters(coordinates)
+    a = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |letter|
+      letter.first()
+    end
+    if a.length == 2
+      if a[1].ord - a[0].ord == 1
+        true
+      else
+        false
+      end
+    elsif a.length == 3
+      if a[2].ord - a[0].ord == 2
+        true
+      else
+        false
+      end
+    end
+  end
+
+  def consecutive_numbers(coordinates)
+    a = coordinates.map do |coordinates|
+      coordinates.split('')
+    end.map do |number|
+      number.last()
+    end
+    if a.length == 2
+      if a[1].to_i - a[0].to_i == 1
+        true
+      else
+        false
+      end
+    elsif a.length == 3
+      if a[2].to_i - a[0].to_i == 2
+        true
+      else
+        false
+      end
+    end
+  end
+
+
   # Are numbers consecutive when ascending? if not, then FALSE.
   # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
 
