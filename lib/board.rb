@@ -26,11 +26,6 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  # def valid_placement?(ship, coordinates)
-  #   #validate length
-  #   if vertical || horizontal == 1
-  #     true
-  # end
 
   #valid placement needs to
   #array needs to be same length as ship
@@ -140,6 +135,47 @@ class Board
   end
 
 
+  def valid_placement?(ship, coordinates)
+    # while valid_lngth is true and cons is true
+    # diaganol
+    # one has to be equal to 1 both can't be
+    if validate_length(ship, coordinates) == true
+      if consecutive_letters(coordinates) || consecutive_numbers(coordinates) == true
+        if consecutive_letters(coordinates) == true  && consecutive_numbers(coordinates) == false
+          if vertical_letters(coordinates) == 1 || horizontal_numbers(coordinates) == 1
+            true
+            if vertical_letters_ascending?(coordinates) == true
+              true
+            else
+              false
+            end
+          else vertical_letters(coordinates) == 1 && horizontal_numbers(coordinates) == 1
+            false
+          end
+        elsif consecutive_letters(coordinates) == false  && consecutive_numbers(coordinates) == true
+          if horizontal_numbers_ascending?(coordinates) == true
+            true
+          else
+            false
+          end
+        else
+          false
+        end
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+end
+
+
+# vertical and horizontal
+
+
+
+
   # Are numbers consecutive when ascending? if not, then FALSE.
   # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
 
@@ -147,9 +183,3 @@ class Board
   # If letters and numbers are both ascending, then FALSE because it would mean it was placed diagonally.
   # If letters are descending, then its FALSE
   # If numbers are descending then its FALSE
-
-
-
-
-
-end
