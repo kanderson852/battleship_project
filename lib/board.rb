@@ -26,9 +26,6 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-
-  #valid placement needs to
-  #array needs to be same length as ship
   def validate_length(ship, coordinates)
     if ship.length == coordinates.length
       true
@@ -36,9 +33,7 @@ class Board
       false
     end
   end
-  # Find a way to check numbers, and letters separately for all conditions after they are passed into our Validate Placement method as an array of coordinates
 
- ## checks for vertical placement
   def vertical_letters(coordinates)
     coordinates.map do |coordinate|
       coordinate.split('')
@@ -46,7 +41,7 @@ class Board
       letter.first()
     end.uniq.length
   end
- ## checks for horizontal placement
+
   def horizontal_numbers(coordinates)
     coordinates.map do |coordinates|
       coordinates.split('')
@@ -55,7 +50,6 @@ class Board
     end.uniq.length
   end
 
-  #checks if letters are in ascending order
   def vertical_letters_ascending?(coordinates)
     a = coordinates.map do |coordinates|
       coordinates.split('')
@@ -73,7 +67,7 @@ class Board
       false
     end
   end
-  #checks if numbers are ascending
+
   def horizontal_numbers_ascending?(coordinates)
     a = coordinates.map do |coordinates|
       coordinates.split('')
@@ -136,9 +130,6 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    # while valid_lngth is true and cons is true
-    # diaganol
-    # one has to be equal to 1 both can't be
     if validate_length(ship, coordinates) == true
       if vertical_letters_ascending?(coordinates) == false && horizontal_numbers_ascending?(coordinates) == false
         false
@@ -178,12 +169,6 @@ class Board
     end
   end
 end
-
-
-# vertical and horizontal
-
-
-
 
   # Are numbers consecutive when ascending? if not, then FALSE.
   # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
