@@ -61,7 +61,7 @@ class Board
       coordinates.split('')
     end.map do |letter|
       letter.first()
-    end.sort
+    end.uniq.sort
     b = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |letter|
@@ -79,7 +79,7 @@ class Board
       coordinates.split('')
     end.map do |number|
       number.last()
-    end.sort
+    end.uniq.sort
     b = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |number|
@@ -140,23 +140,24 @@ class Board
     # diaganol
     # one has to be equal to 1 both can't be
     if validate_length(ship, coordinates) == true
-      if consecutive_letters(coordinates) || consecutive_numbers(coordinates) == true
+      if vertical_letters_ascending?(coordinates) == false && horizontal_numbers_ascending?(coordinates) == false
+        false
+      elsif consecutive_letters(coordinates) || consecutive_numbers(coordinates) == true
         if consecutive_letters(coordinates) == true  && consecutive_numbers(coordinates) == false
           if vertical_letters(coordinates) == 1 || horizontal_numbers(coordinates) == 1
-            true
             if vertical_letters_ascending?(coordinates) == true
               true
             else
               false
             end
-          else vertical_letters(coordinates) == 1 && horizontal_numbers(coordinates) == 1
-            false
           end
         elsif consecutive_letters(coordinates) == false  && consecutive_numbers(coordinates) == true
-          if horizontal_numbers_ascending?(coordinates) == true
-            true
-          else
-            false
+          if vertical_letters(coordinates) == 1 || horizontal_numbers(coordinates) == 1
+            if horizontal_numbers_ascending?(coordinates) == true
+              true
+            else
+              false
+            end
           end
         else
           false
