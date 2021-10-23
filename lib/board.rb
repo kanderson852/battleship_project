@@ -172,11 +172,8 @@ class Board
 
   def place_ship(ship, coordinates)
     if valid_placement?(ship, coordinates)
-      # place = Hash.new
-      coordinates.map do |coordinate|
-        
-        # place = [coordinate: ship]
-        require "pry"; binding.pry
+      coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
       end
     end
   end
