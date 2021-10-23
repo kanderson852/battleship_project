@@ -170,4 +170,13 @@ class Board
       end
     end
   end
+
+  def render(optional_arg = false)
+    "  1 2 3 4 \n" +
+    "A #{@cells["A1"].render(optional_arg)} #{@cells["A2"].render(optional_arg)} #{@cells["A3"].render(optional_arg)} #{@cells["A4"].render(optional_arg)} \n" +
+    "B #{@cells["B1"].render(optional_arg)} #{@cells["B2"].render(optional_arg)} #{@cells["B3"].render(optional_arg)} #{@cells["B4"].render(optional_arg)} \n" +
+    "C #{@cells["C1"].render(optional_arg)} #{@cells["C2"].render(optional_arg)} #{@cells["C3"].render(optional_arg)} #{@cells["C4"].render(optional_arg)} \n" +
+    "D #{@cells["D1"].render(optional_arg)} #{@cells["D2"].render(optional_arg)} #{@cells["D3"].render(optional_arg)} #{@cells["D4"].render(optional_arg)} \n"
+
+  end
 end
