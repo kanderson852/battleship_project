@@ -130,7 +130,9 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    if validate_length(ship, coordinates) == true
+    if coordinates.any? {|coordinate|}
+      false
+    elsif validate_length(ship, coordinates) == true
       if vertical_letters_ascending?(coordinates) == false && horizontal_numbers_ascending?(coordinates) == false
         false
       elsif consecutive_letters(coordinates) || consecutive_numbers(coordinates) == true
@@ -169,11 +171,3 @@ class Board
     end
   end
 end
-
-  # Are numbers consecutive when ascending? if not, then FALSE.
-  # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
-
-  # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there more than 1 number used, then FALSE.
-  # If letters and numbers are both ascending, then FALSE because it would mean it was placed diagonally.
-  # If letters are descending, then its FALSE
-  # If numbers are descending then its FALSE
