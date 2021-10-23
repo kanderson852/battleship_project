@@ -169,6 +169,17 @@ class Board
       false
     end
   end
+
+  def place_ship(ship, coordinates)
+    if valid_placement?(ship, coordinates)
+      # place = Hash.new
+      coordinates.map do |coordinate|
+        
+        # place = [coordinate: ship]
+        require "pry"; binding.pry
+      end
+    end
+  end
 end
 
 
