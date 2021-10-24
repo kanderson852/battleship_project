@@ -130,7 +130,9 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    if validate_length(ship, coordinates) == true
+    if coordinates.any? {|coordinate|}
+      false
+    elsif validate_length(ship, coordinates) == true
       if vertical_letters_ascending?(coordinates) == false && horizontal_numbers_ascending?(coordinates) == false
         false
       elsif consecutive_letters(coordinates) || consecutive_numbers(coordinates) == true
@@ -168,12 +170,13 @@ class Board
       end
     end
   end
+
+  def render(optional_arg = false)
+    "  1 2 3 4 \n" +
+    "A #{@cells["A1"].render(optional_arg)} #{@cells["A2"].render(optional_arg)} #{@cells["A3"].render(optional_arg)} #{@cells["A4"].render(optional_arg)} \n" +
+    "B #{@cells["B1"].render(optional_arg)} #{@cells["B2"].render(optional_arg)} #{@cells["B3"].render(optional_arg)} #{@cells["B4"].render(optional_arg)} \n" +
+    "C #{@cells["C1"].render(optional_arg)} #{@cells["C2"].render(optional_arg)} #{@cells["C3"].render(optional_arg)} #{@cells["C4"].render(optional_arg)} \n" +
+    "D #{@cells["D1"].render(optional_arg)} #{@cells["D2"].render(optional_arg)} #{@cells["D3"].render(optional_arg)} #{@cells["D4"].render(optional_arg)} \n"
+
+  end
 end
-
-  # Are numbers consecutive when ascending? if not, then FALSE.
-  # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there is only 1 number used, then TRUE.
-
-  # When more than one letter is used, and its ascending, is it consecutive? if yes, AND there more than 1 number used, then FALSE.
-  # If letters and numbers are both ascending, then FALSE because it would mean it was placed diagonally.
-  # If letters are descending, then its FALSE
-  # If numbers are descending then its FALSE

@@ -30,8 +30,8 @@ class Cell
     @fired = true
   end
 
-  def render(optional_arg = false)
-    if @fired == false && optional_arg == true
+  def render(reveal = false)
+    if @fired == false && reveal == true && self.empty? == false
       "S"
     elsif @fired == false
       "."
