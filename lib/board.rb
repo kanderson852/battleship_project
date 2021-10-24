@@ -51,17 +51,17 @@ class Board
   end
 
   def vertical_letters_ascending?(coordinates)
-    a = coordinates.map do |coordinates|
+    sort = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |letter|
       letter.first()
     end.uniq.sort
-    b = coordinates.map do |coordinates|
+    compare = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |letter|
       letter.first()
     end
-    if a == b
+    if sort == compare
       true
     else
       false
@@ -69,17 +69,17 @@ class Board
   end
 
   def horizontal_numbers_ascending?(coordinates)
-    a = coordinates.map do |coordinates|
+    sort = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |number|
       number.last()
     end.uniq.sort
-    b = coordinates.map do |coordinates|
+    compare = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |number|
       number.last()
     end
-    if a == b
+    if sort == compare
       true
     else
       false
@@ -87,19 +87,19 @@ class Board
   end
 
   def consecutive_letters(coordinates)
-    a = coordinates.map do |coordinates|
+    sort = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |letter|
       letter.first()
     end
-    if a.length == 2
-      if a[1].ord - a[0].ord == 1
+    if sort.length == 2
+      if sort[1].ord - sort[0].ord == 1
         true
       else
         false
       end
-    elsif a.length == 3
-      if a[2].ord - a[0].ord == 2
+    elsif sort.length == 3
+      if sort[2].ord - sort[0].ord == 2
         true
       else
         false
@@ -108,19 +108,19 @@ class Board
   end
 
   def consecutive_numbers(coordinates)
-    a = coordinates.map do |coordinates|
+    sort = coordinates.map do |coordinates|
       coordinates.split('')
     end.map do |number|
       number.last()
     end
-    if a.length == 2
-      if a[1].to_i - a[0].to_i == 1
+    if sort.length == 2
+      if sort[1].to_i - sort[0].to_i == 1
         true
       else
         false
       end
-    elsif a.length == 3
-      if a[2].to_i - a[0].to_i == 2
+    elsif sort.length == 3
+      if sort[2].to_i - sort[0].to_i == 2
         true
       else
         false
