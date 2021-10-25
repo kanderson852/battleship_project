@@ -11,8 +11,10 @@ class Turn
     @user_ships = []
   end
 
-  def start_game
-  end 
+  def user_input
+    gets.chomp
+  end
+
 
   # Computer can place ships randomly in valid locations
   def random_placer_cruiser
@@ -37,14 +39,14 @@ class Turn
     @computer_board.render(true)
   end
 
-  def user_place_ships
-    cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
-    until @user_board.valid_placement?(submarine, coordinates = gets.chomp) == true do
-      coordinates = gets.chomp
-    end
-    @user_board.place_ship(cruiser, coordinates)
-  end
+  # def user_place_ships
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   submarine = Ship.new("Submarine", 2)
+  #   until @user_board.valid_placement?(submarine, coordinates = gets.chomp) == true do
+  #     coordinates = gets.chomp
+  #   end
+  #   @user_board.place_ship(cruiser, coordinates)
+  # end
 # User can enter valid sequences to place both ships
 # method user_place_ships
 # Entering invalid ship placements prompts user to enter valid placements
@@ -61,6 +63,33 @@ class Turn
 # def computer_render
 # Computer chooses a random shot
   def shoot(coordinate)
+  end
+
+  def welcome_message
+    puts  "Welcome to BATTLESHIP"
+    puts  "Enter p to play. Enter q to quit."
+  end
+
+  def game_rules
+    computer_place_ships
+    puts"I have laid out my ships on the grid."
+    "You now need to lay out your two ships."
+    "The Cruiser is three units long and the Submarine is two units long."
+    puts "#{@user_board.render(true)}"
+    "Enter the squares for the Cruiser (3 spaces):"
+  end
+
+  def start_game
+    puts welcome_message
+    if user_input =="p"
+      puts game_rules
+    else user_input == "q"
+      puts "Goodbye"
+    end
+  end
+
+  def user_play
+
   end
 end
 
@@ -85,4 +114,5 @@ end
 # Game reports who won
 # Game returns user back to the Main Menu
 turn = Turn.new
-turn.user_place_ships
+# turn.user_place_ships
+turn.start_game
