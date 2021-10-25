@@ -10,6 +10,10 @@ class Turn
     @computer_ships = []
     @user_ships = []
   end
+
+  def start_game
+  end 
+
   # Computer can place ships randomly in valid locations
   def random_placer_cruiser
     @computer_board.cells.keys.to_a.sample(3)
@@ -33,24 +37,34 @@ class Turn
     @computer_board.render(true)
   end
 
-#   def user_place_ships
-#     cruiser = Ship.new("Cruiser", 3)
-#     submarine = Ship.new("Submarine", 2)
-#     until @user_board.valid_placement?(submarine, coordinates = user_input) == true do
-#       coordinates = user_input
-#     end
-#     @user_board.place_ship(cruiser, coordinates)
-#   end
-# end
+  def user_place_ships
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    until @user_board.valid_placement?(submarine, coordinates = gets.chomp) == true do
+      coordinates = gets.chomp
+    end
+    @user_board.place_ship(cruiser, coordinates)
+  end
 # User can enter valid sequences to place both ships
 # method user_place_ships
 # Entering invalid ship placements prompts user to enter valid placements
 # Turn:
 # User board is displayed showing hits, misses, sunken ships, and ships
-# def user_render
+  def user_render
+    @user_board.render(true)
+  end
+
+  def computer_render
+    @computer_board.render
+  end
 # Computer board is displayed showing hits, misses, and sunken ships
 # def computer_render
 # Computer chooses a random shot
+  def shoot(coordinate)
+  end
+end
+
+
 # def computer_take_turn
 #   def shoot
 # Computer does not fire on the same spot twice
@@ -70,3 +84,5 @@ class Turn
 # Game ends when all the computer’s ships are sunk
 # Game reports who won
 # Game returns user back to the Main Menu
+turn = Turn.new
+turn.user_place_ships
