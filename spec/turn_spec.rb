@@ -27,4 +27,6 @@ describe Turn do
     turn = Turn.new
     expect(turn.user_place_ships).to eq(turn.user_board.render(true))
   end
+
+  
 end
