@@ -130,7 +130,7 @@ class Board
 
 
   def valid_placement?(ship, coordinates)
-    if coordinates.any? {|coordinate|}
+    if coordinates.any? {|coordinate| @cells[coordinate].ship} == true
       false
     elsif validate_length(ship, coordinates) == true
       if vertical_letters_ascending?(coordinates) == false && horizontal_numbers_ascending?(coordinates) == false
