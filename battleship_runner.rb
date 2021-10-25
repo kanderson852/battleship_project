@@ -1,3 +1,7 @@
+require './lib/board'
+require "./lib/ship"
+require "./lib/cell"
+require "./lib/turn"
 Main Menu:
 
 User is shown the main menu where they can play or quit
