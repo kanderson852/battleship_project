@@ -34,7 +34,7 @@ class Player
     submarine = Ship.new("Submarine", 2)
     coordinates = []
     until @board.valid_placement?(cruiser, coordinates) == true do
-      coordinates = gets.chomp.split(' ')
+      coordinates = gets.chomp.upcase.split(' ')
       if @board.valid_placement?(cruiser, coordinates) == false
         puts "Those are invalid coordinates. Please try again:"
       end
@@ -43,7 +43,7 @@ class Player
     puts "Then enter the squares for the Submarine (2 spaces):"
     until @board.valid_placement?(submarine, coordinates) == true do
 
-      coordinates = gets.chomp.split(' ')
+      coordinates = gets.chomp.upcase.split(' ')
       if @board.valid_placement?(submarine, coordinates) == false
         puts "Those are invalid coordinates. Please try again:"
       end
