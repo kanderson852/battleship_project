@@ -1,3 +1,6 @@
+require './lib/board'
+require "./lib/ship"
+require "./lib/cell"
 class Player
   attr_reader :computer_board, :user_board
   def initialize()
@@ -26,14 +29,27 @@ class Player
     @computer_board.place_ship(submarine, coordinates)
     @computer_board.render(true)
   end
-end
 
-#   def user_place_ships
-#     cruiser = Ship.new("Cruiser", 3)
-#     submarine = Ship.new("Submarine", 2)
-#     until @user_board.valid_placement?(submarine, coordinates = gets.chomp) == true do
-#       coordinates = gets.chomp
-#     end
-#     @user_board.place_ship(cruiser, coordinates)
-#   end
-# end
+  def user_place_ships
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    coordinates = []
+    until @user_board.valid_placement?(cruiser, coordinates) == true do
+      coordinates = gets.chomp.split(' ')
+      if @user_board.valid_placement?(cruiser, coordinates) == false
+        puts "Those are invalid coordinates. Please try again:"
+      end
+    end
+    @user_board.place_ship(cruiser, coordinates)
+    until @user_board.valid_placement?(submarine, coordinates) == true do
+      coordinates = gets.chomp.split(' ')
+      if @user_board.valid_placement?(submarine, coordinates) == false
+        puts "Those are invalid coordinates. Please try again:"
+      end
+    end
+    @user_board.place_ship(submarine, coordinates)
+    @user_board.render(true)
+  end
+end
+player = Player.new
+player.user_place_ships
