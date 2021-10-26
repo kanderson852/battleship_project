@@ -40,7 +40,9 @@ class Player
       end
     end
     @board.place_ship(cruiser, coordinates)
+    puts "Then enter the squares for the Submarine (2 spaces):"
     until @board.valid_placement?(submarine, coordinates) == true do
+
       coordinates = gets.chomp.split(' ')
       if @board.valid_placement?(submarine, coordinates) == false
         puts "Those are invalid coordinates. Please try again:"

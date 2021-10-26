@@ -23,12 +23,19 @@ class Game
   end
 
   def game_rules
-    computer_place_ships
+    @computer.computer_place_ships
     puts"I have laid out my ships on the grid."
     "You now need to lay out your two ships."
     "The Cruiser is three units long and the Submarine is two units long."
-    puts "#{@user_board.render(true)}"
-    "Enter the squares for the Cruiser (3 spaces):"
+    puts "#{@user.board.render(true)}"
+    puts "Enter the squares for the Cruiser (3 spaces):"
+  
+    @user.user_place_ships
+
+  end
+
+  def user_input
+    gets.chomp
   end
 
   def start_game
@@ -39,9 +46,4 @@ class Game
       puts "Goodbye"
     end
   end
-
-
-
-
-
 end
