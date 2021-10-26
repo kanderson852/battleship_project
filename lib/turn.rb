@@ -34,6 +34,20 @@ class Turn
     gets.chomp
   end
 
+  def computer_fired(coordinate = user.user_board.cells.keys.sample(1))
+    loop do
+        if user.user_board.cells[coordinate].fired == true && user.user_board.cells[coordinate].is_empty == true
+          user.user_board.cells[coordinate].render == "M"
+        elsif user.user_board.cells[coordinate].fired == true && user.user_board.cells[coordinate].is_empty == false && user.user_board.cells.cell[coordinate].ship.sunk? == true
+          user.user_board.cells[coordinate].render == "X"
+        elsif user.user_board.cells[coordinate].fired == true && user.user_board.cells[coordinate].is_empty == false
+          user.user_board.cells[coordinate].render == "H"
+        end
+        p user.user_board.render
+        break
+    end
+  end
+
   def valid_fire?(coordinate)
     computer.computer_board.cells.keys.include?(coordinate)
   end
@@ -43,13 +57,14 @@ class Turn
       if user_input.valid_fire? == false
         puts "Please enter a valid coordinate:"
       else
-        if @fired == true && @is_empty == true
-          "M"
-        elsif @fired == true && @is_empty == false && ship.sunk? == true
-          "X"
-        elsif @fired == true && @is_empty == false
-          "H"
+        if computer_board.cells.fired == true && computer_board.cells.is_empty == true
+          computer_board.cells.render == "M"
+        elsif computer_board.cells.fired == true && computer_board.cells.is_empty == false && computer_board.cell.ship.sunk? == true
+          computer_board.cells.render == "X"
+        elsif computer_board.cells.fired == true && computer_board.cells.is_empty == false
+          computer_board.cells.render == "H"
         end
+        break
       end
     end
   end
