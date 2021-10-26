@@ -51,5 +51,5 @@ class Player
     @user_board.render(true)
   end
 end
-player = Player.new
-player.user_place_ships
+# player = Player.new
+# player.user_place_ships

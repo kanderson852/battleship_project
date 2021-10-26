@@ -1,13 +1,25 @@
 require './lib/board'
 require "./lib/ship"
 require "./lib/cell"
-require ".lib/player"
+require "./lib/player"
 class Turn
-  attr_reader
-  def initialize()
-
+  attr_reader :computer,
+              :user,
+              :computer_sunk,
+              :user_sunk
+  def initialize
+    @computer = Player.new
+    @user = Player.new
+    @computer_sunk = 0
+    @user_sunk = 0
   end
 
+  def display_boards
+    puts "=============COMPUTER BOARD============="
+    computer_render
+    puts "==============PLAYER BOARD=============="
+    user_render
+  end
   def user_input
     gets.chomp
   end

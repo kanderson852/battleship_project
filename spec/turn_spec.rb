@@ -1,6 +1,7 @@
 require './lib/board'
 require "./lib/ship"
 require "./lib/cell"
+require "./lib/player"
 require "./lib/turn"
 require "rspec"
 
@@ -12,13 +13,9 @@ describe Turn do
 
   it 'attributes' do
     turn = Turn.new
-    expect(turn.computer_board).to be_an_instance_of(Board)
-    expect(turn.user_board).to be_an_instance_of(Board)
-    expect(turn.computer_ships).to eq([])
-    expect(turn.user_ships).to eq([])
+    expect(turn.computer).to be_an_instance_of(Player)
+    expect(turn.user).to be_an_instance_of(Player)
+    expect(turn.computer_sunk).to eq(0)
+    expect(turn.user_sunk).to eq(0)
   end
-
-  
-
-
 end
