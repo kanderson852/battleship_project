@@ -3,11 +3,9 @@ require "./lib/ship"
 require "./lib/cell"
 require ".lib/player"
 class Turn
-  attr_reader :computer_ships, :user_ships
+  attr_reader
   def initialize()
 
-    @computer_ships =
-    @user_ships =
   end
 
   def user_input
@@ -16,7 +14,7 @@ class Turn
 
 
   # Computer can place ships randomly in valid locations
-  
+
 # User can enter valid sequences to place both ships
 # method user_place_ships
 # Entering invalid ship placements prompts user to enter valid placements
@@ -60,6 +58,3 @@ end
 # Game ends when all the computer’s ships are sunk
 # Game reports who won
 # Game returns user back to the Main Menu
-turn = Turn.new
-# turn.user_place_ships
-turn.start_game

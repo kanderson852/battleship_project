@@ -20,8 +20,8 @@ describe Player do
     expect(player.computer_place_ships).to eq(player.computer_board.render(true))
   end
 
-  it 'user places ships' do
-    turn = Turn.new
-    expect(turn.user_place_ships).to eq(turn.user_board.render(true))
-  end
+  # it 'user places ships' do
+  #   player = Player.new
+  #   expect(player.user_place_ships).to eq()
+  # end
 end
