@@ -10,8 +10,17 @@ class Turn
   def initialize
     @computer = Player.new
     @user = Player.new
+
     @computer_sunk = 0
     @user_sunk = 0
+  end
+
+  def user_render
+    @user_board.render(true)
+  end
+
+  def computer_render
+    @computer_board.render
   end
 
   def display_boards
@@ -20,34 +29,35 @@ class Turn
     puts "==============PLAYER BOARD=============="
     user_render
   end
+
   def user_input
     gets.chomp
   end
 
-
-  # Computer can place ships randomly in valid locations
-
-# User can enter valid sequences to place both ships
-# method user_place_ships
-# Entering invalid ship placements prompts user to enter valid placements
-# Turn:
-# User board is displayed showing hits, misses, sunken ships, and ships
-  def user_render
-    @user_board.render(true)
+  def valid_fire?(coordinate)
+    computer.computer_board.cells.keys.include?(coordinate)
   end
 
-  def computer_render
-    @computer_board.render
-  end
-# Computer board is displayed showing hits, misses, and sunken ships
-# def computer_render
-# Computer chooses a random shot
-  def shoot(coordinate)
+  def user_fired(coordinate)
+    loop do
+      if user_input.valid_fire? == false
+        puts "Please enter a valid coordinate:"
+      else
+        if @fired == true && @is_empty == true
+          "M"
+        elsif @fired == true && @is_empty == false && ship.sunk? == true
+          "X"
+        elsif @fired == true && @is_empty == false
+          "H"
+        end
+      end
+    end
   end
 
-  def user_play
 
-  end
+  # def computer_fired
+  #
+  # end
 end
 
 
