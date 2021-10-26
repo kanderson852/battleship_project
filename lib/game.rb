@@ -46,7 +46,7 @@ class Game
 
   def display_boards
     puts "=============COMPUTER BOARD============="
-    puts @computer.board.render
+    puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @user.board.render(true)
   end
@@ -55,6 +55,14 @@ class Game
     computer.board.cells.keys.include?(coordinate)
   end
 
+  # def sunk?
+  #   if @player_ships_sunk >= 1 || @computer_ships_sunk
+  #     false
+  #   elsif @health < 1
+  #      true
+  #   end
+  # end
+
   def computer_fired(coordinate = user.board.cells.keys.sample)
     if valid_fire?(coordinate) == true
     loop do
@@ -62,14 +70,16 @@ class Game
           user.board.cells[coordinate].fire_upon
           user.board.cells[coordinate].render(true) == "M"
           puts "My shot on #{coordinate} was a miss"
-        elsif user.board.cells[coordinate].fired_upon? == false && user.board.cells[coordinate].is_empty == false && user.board.cells[coordinate].ship.sunk? == true
-          user.board.cells[coordinate].fire_upon
-          user.board.cells[coordinate].render(true) == "X"
-          puts "My shot on #{coordinate} was a hit and I sunk your ship"
         elsif user.board.cells[coordinate].fired_upon? == false && user.board.cells[coordinate].is_empty == false
           user.board.cells[coordinate].fire_upon
           user.board.cells[coordinate].render(true) == "H"
           puts "My shot on #{coordinate} was a hit"
+        elsif user.board.cells[coordinate].fired_upon? == false && user.board.cells[coordinate].is_empty == false && user.board.cells[coordinate].ship.sunk? == true
+          user.board.cells[coordinate].fire_upon
+          user.board.cells[coordinate].render(true) == "X"
+          puts "My shot on #{coordinate} was a hit and I sunk your ship"
+
+          # @player_ships_sunk += 1
         end
         display_boards
         break
@@ -85,12 +95,13 @@ class Game
           if computer.board.cells[coordinate].is_empty == true
             computer.board.cells[coordinate].render(true) == "M"
             puts "Your shot on #{coordinate} was a miss"
-          elsif computer.board.cells[coordinate].fired_upon? == false && computer.board.cells[coordinate].is_empty == false && computer.board.cells[coordinate].ship.sunk? == true
-            computer.board.cells[coordinate].render(true) == "X"
-            puts "Your shot on #{coordinate} was a hit and I sunk your ship"
           elsif computer.board.cells[coordinate].fired_upon? == false && computer.board.cells[coordinate].is_empty == false
             computer.board.cells[coordinate].render(true) == "H"
             puts "Your shot on #{coordinate} was a hit"
+          elsif computer.board.cells[coordinate].fired_upon? == false && computer.board.cells[coordinate].is_empty == false && computer.board.cells[coordinate].ship.sunk? == true
+            computer.board.cells[coordinate].render(true) == "X"
+            puts "Your shot on #{coordinate} was a hit and I sunk your ship"
+            @computer_ships_sunk += 1
           end
         end
       elsif valid_fire?(coordinate) == false
@@ -101,14 +112,20 @@ class Game
     end
   end
 
-  def start_turn
-    computer_fired
-    puts "Enter the coordinate for your shot:"
-    user_fired
-
-    # until @computer_ships_sunk == 2 || @player_ships_sunk == 2 do
-    #
-    # end
+  def game_over?
+    if computer.computer_cruiser.sunk? == true && computer.computer_submarine.sunk? == true
+      puts "You sunk my battleship!"
+    elsif user.user_cruiser.sunk? == true && user.user_submarine.sunk? == true
+      puts "I sunk your battleship!!!"
+    end
   end
 
+  def start_turn
+    loop do
+      puts "Enter the coordinate for your shot:"
+      user_fired
+      computer_fired
+      break if game_over? == true
+    end
+  end
 end
