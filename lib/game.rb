@@ -1,7 +1,18 @@
+require './lib/board'
+require "./lib/ship"
+require "./lib/cell"
+require "./lib/player"
+require "./lib/turn"
+
 class Game
-  attr_reader :player_ships_sunk,
+  attr_reader :computer,
+              :user,
+              :player_ships_sunk,
               :computer_ships_sunk
-  def initialize
+
+  def initialize(computer, user)
+    @computer = computer
+    @user = user
     @player_ships_sunk = 0
     @computer_ships_sunk = 0
   end
@@ -29,7 +40,7 @@ class Game
     end
   end
 
-  def 
+
 
 
 
