@@ -24,4 +24,9 @@ describe Turn do
     expect(turn.valid_fire?("A1")).to eq(true)
     expect(turn.valid_fire?("Z1")).to eq(false)
   end
+
+  it 'computer fires' do
+    turn = Turn.new
+    expect(turn.computer_fired).to eq('x')
+  end
 end
