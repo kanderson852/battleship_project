@@ -8,21 +8,11 @@ class Game
               :user,
               :player_ships_sunk,
               :computer_ships_sunk
-              # :computer_cruiser,
-              # :computer_submarine,
-              # :user_cruiser,
-              # :user_submarine
-
 
   def initialize
     @computer = Player.new
     @user = Player.new
-    # @computer_cruiser = Ship.new("Cruiser", 3)
-    # @computer_submarine = Ship.new("Submarine", 2)
-    # @user_cruiser = Ship.new("Cruiser", 3)
-    # @user_submarine = Ship.new("Submarine", 2)
-    @player_ships_sunk = 0
-    @computer_ships_sunk = 0
+
   end
 
   def welcome_message
@@ -46,9 +36,9 @@ class Game
 
   def start_game
     puts welcome_message
-    if user_input =="p"
+    if user_input.downcase =="p"
       puts game_rules
-    else user_input == "q"
+    else user_input.downcase == "q"
       puts "Goodbye"
     end
   end
@@ -63,14 +53,6 @@ class Game
   def valid_fire?(coordinate)
     computer.board.cells.keys.include?(coordinate)
   end
-
-  # def sunk?
-  #   if @player_ships_sunk >= 1 || @computer_ships_sunk
-  #     false
-  #   elsif @health < 1
-  #      true
-  #   end
-  # end
 
   def computer_fired(coordinate = user.board.cells.keys.sample)
     if valid_fire?(coordinate) == true
@@ -87,8 +69,6 @@ class Game
           user.board.cells[coordinate].fire_upon
           user.board.cells[coordinate].render(true) == "X"
           puts "My shot on #{coordinate} was a hit and I sunk your ship"
-
-          # @player_ships_sunk += 1
         end
         display_boards
         break
@@ -96,7 +76,7 @@ class Game
     end
   end
 
-  def user_fired(coordinate = user_input)
+  def user_fired(coordinate = user_input.upcase)
     loop do
       if valid_fire?(coordinate) == true
         if computer.board.cells[coordinate].fired_upon? == false
@@ -110,7 +90,6 @@ class Game
           elsif computer.board.cells[coordinate].fired_upon? == false && computer.board.cells[coordinate].is_empty == false && computer.board.cells[coordinate].ship.sunk? == true
             computer.board.cells[coordinate].render(true) == "X"
             puts "Your shot on #{coordinate} was a hit and I sunk your ship"
-            @computer_ships_sunk += 1
           end
         end
       elsif valid_fire?(coordinate) == false
@@ -134,7 +113,6 @@ class Game
     end
   end
 
-
   def start_turn
     loop do
       puts "Enter the coordinate for your shot:"
@@ -145,4 +123,5 @@ class Game
     winner
     start_game
   end
+
 end
