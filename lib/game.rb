@@ -8,10 +8,19 @@ class Game
               :user,
               :player_ships_sunk,
               :computer_ships_sunk
+              # :computer_cruiser,
+              # :computer_submarine,
+              # :user_cruiser,
+              # :user_submarine
 
-  def initialize(computer, user)
-    @computer = computer
-    @user = user
+
+  def initialize
+    @computer = Player.new
+    @user = Player.new
+    # @computer_cruiser = Ship.new("Cruiser", 3)
+    # @computer_submarine = Ship.new("Submarine", 2)
+    # @user_cruiser = Ship.new("Cruiser", 3)
+    # @user_submarine = Ship.new("Submarine", 2)
     @player_ships_sunk = 0
     @computer_ships_sunk = 0
   end
@@ -113,12 +122,18 @@ class Game
   end
 
   def game_over?
+    (computer.computer_cruiser.sunk? == true && computer.computer_submarine.sunk? == true) || (user.user_cruiser.sunk? == true && user.user_submarine.sunk? == true)
+  end
+
+  def winner
+    puts "Game over!"
     if computer.computer_cruiser.sunk? == true && computer.computer_submarine.sunk? == true
-      puts "You sunk my battleship!"
+      puts "You won!"
     elsif user.user_cruiser.sunk? == true && user.user_submarine.sunk? == true
-      puts "I sunk your battleship!!!"
+      puts "I won!"
     end
   end
+
 
   def start_turn
     loop do
@@ -127,5 +142,7 @@ class Game
       computer_fired
       break if game_over? == true
     end
+    winner
+    start_game
   end
 end

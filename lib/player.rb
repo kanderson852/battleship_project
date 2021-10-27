@@ -1,10 +1,15 @@
 require './lib/board'
 require "./lib/ship"
 require "./lib/cell"
+
 class Player
-  attr_reader :board
+  attr_reader :board, :computer_cruiser, :computer_submarine, :user_cruiser, :user_submarine
   def initialize
     @board = Board.new
+    @computer_cruiser = Ship.new("Cruiser", 3)
+    @computer_submarine = Ship.new("Submarine", 2)
+    @user_cruiser = Ship.new("Cruiser", 3)
+    @user_submarine = Ship.new("Submarine", 2)
   end
 
   def random_placer_cruiser
@@ -16,12 +21,12 @@ class Player
   end
 
   def computer_place_ships
-    computer_cruiser = Ship.new("Cruiser", 3)
+    # computer_cruiser = Ship.new("Cruiser", 3)
     until @board.valid_placement?(computer_cruiser, coordinates = random_placer_cruiser) == true do
       random_placer_cruiser
     end
     @board.place_ship(computer_cruiser, coordinates)
-    computer_submarine = Ship.new("Submarine", 2)
+    # computer_submarine = Ship.new("Submarine", 2)
     until @board.valid_placement?(computer_submarine, coordinates = random_placer_submarine) == true do
       random_placer_submarine
     end
@@ -30,8 +35,8 @@ class Player
   end
 
   def user_place_ships
-    user_cruiser = Ship.new("Cruiser", 3)
-    user_submarine = Ship.new("Submarine", 2)
+    # user_cruiser = Ship.new("Cruiser", 3)
+    # user_submarine = Ship.new("Submarine", 2)
     coordinates = []
     until @board.valid_placement?(user_cruiser, coordinates) == true do
       coordinates = gets.chomp.upcase.split(' ')

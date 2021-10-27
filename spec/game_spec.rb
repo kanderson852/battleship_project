@@ -17,8 +17,8 @@ describe Game do
     user = Player.new
     computer = Player.new
     game = Game.new(computer, user)
-    expect(game.computer).to eq(computer)
-    expect(game.user).to eq(user)
+    expect(game.computer).to be_an_instance_of(Player)
+    expect(game.user).to be_an_instance_of(Player)
 
   end
 
