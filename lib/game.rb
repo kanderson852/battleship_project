@@ -23,11 +23,13 @@ class Game
   def game_rules
     @computer.computer_place_ships
     puts"I have laid out my ships on the grid."
-    "You now need to lay out your two ships."
-    "The Cruiser is three units long and the Submarine is two units long."
+    puts "You now need to lay out your two ships."
+    sleep(1.0)
+    puts "The Cruiser is three units long and the Submarine is two units long."
     puts "#{@user.board.render(true)}"
     puts "Enter the squares for the Cruiser (3 spaces):"
     @user.user_place_ships
+    
   end
 
   def user_input
@@ -44,10 +46,14 @@ class Game
   end
 
   def display_boards
+    sleep(1.5)
     puts "=============COMPUTER BOARD============="
     puts @computer.board.render(true)
+    sleep(1.5)
     puts "==============PLAYER BOARD=============="
     puts @user.board.render(true)
+    sleep(1.5)
+
   end
 
   def valid_fire?(coordinate)
@@ -89,7 +95,7 @@ class Game
             puts "Your shot on #{coordinate} was a hit"
           elsif computer.board.cells[coordinate].fired_upon? == false && computer.board.cells[coordinate].is_empty == false && computer.board.cells[coordinate].ship.sunk? == true
             computer.board.cells[coordinate].render(true) == "X"
-            puts "Your shot on #{coordinate} was a hit and I sunk your ship"
+            puts "Your shot on #{coordinate} was a hit and you sunk my BATTLESHIP!"
           end
         end
       elsif valid_fire?(coordinate) == false
@@ -121,7 +127,6 @@ class Game
       break if game_over? == true
     end
     winner
-    start_game
+    load "./battleship_runner.rb"
   end
-
 end
