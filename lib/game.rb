@@ -29,7 +29,7 @@ class Game
     puts "#{@user.board.render(true)}"
     puts "Enter the squares for the Cruiser (3 spaces):"
     @user.user_place_ships
-    
+
   end
 
   def user_input
@@ -48,7 +48,7 @@ class Game
   def display_boards
     sleep(1.5)
     puts "=============COMPUTER BOARD============="
-    puts @computer.board.render(true)
+    puts @computer.board.render()
     sleep(1.5)
     puts "==============PLAYER BOARD=============="
     puts @user.board.render(true)
